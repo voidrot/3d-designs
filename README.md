@@ -22,6 +22,10 @@ Parametric FreeCAD designs for 3D-printed parts. Each project lives in its own f
 └── *.png            renders
 ```
 
+## Cloning
+
+Binary files (`*.FCStd`, `*.stl`, `*.stp`/`*.step`, `*.3mf`, `*.png`) are stored with [Git LFS](https://git-lfs.com). Install it before cloning, or run `git lfs install && git lfs pull` afterward.
+
 ## Rebuilding a project
 
 Requires FreeCAD 1.1 or later.

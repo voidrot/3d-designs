@@ -72,4 +72,5 @@ A new project gets its own folder with a `PLAN.md` and a generator, following th
 - `Part.makeWireString` returns empty wire lists for spaces. Skip them before `Part.makeFace(..., "Part::FaceMakerBullseye")`, or you get "result shape is null". Bullseye handles letters with holes.
 - **Screenshots:** `setViewDirection` without an up vector gives skewed views. Temporarily reset the assembly placement and use the standard views instead.
 - The shell aliases `mv` to ask before overwriting, which hangs non-interactive commands. Use `\mv -f`.
-- FreeCAD writes `*.FCBak` backups next to saved documents.
+- FreeCAD writes `*.FCBak` backups next to saved documents (gitignored).
+- **Git LFS** tracks `*.FCStd`, `*.stl`, `*.stp`/`*.step`, `*.3mf`, `*.png` (see `.gitattributes`); the hooks are installed with `--local`. Add new binary types there before committing them. After `git lfs migrate`, the working tree can be left holding pointer files; `git lfs checkout` restores the content.
