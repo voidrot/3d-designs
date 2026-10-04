@@ -1,0 +1,10 @@
+# FreeCAD backups
+*.FCBak
+
+# Python
+__pycache__/
+
+# Local tooling
+.codegraph/
+.pi/
+.claude/settings.local.json

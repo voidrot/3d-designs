@@ -1,0 +1,9 @@
+GUI active document ELCROW_10_1_Dev_Frame_FirstFit_V6
+Source preserved live: 52 solids / 66473.589978309 mm3
+GUI native V6: all 9 printable objects valid single solids; no TEMP_ objects persisted
+Rear reference extremum Y=-14.600 mm; coplanar side support plane Y=-16.600 mm; minimum electronics clearance 2.000 mm
+Worst nonbearing bezel clearance 2.300 mm; worst fastener clearance 2.600 mm; retainer clearance 6.600 mm
+Four 36.000 mm2 bearing witnesses passed; support polygon X=-126.5..126.5, Z=-70..70 contains nominal centroid
+Independent FreeCAD 1.1.3 STL reload: all 9 finite, nonempty, base Z=0 and <=250 mm; largest dimension 231.400 mm
+Native FCStd ZIP integrity: PASS (129 entries)
+WARN only: Cradle_Left.stl and Cradle_Right.stl reload with isSolid=False, hasNonManifolds=False; accepted nonwatertight warning
