@@ -116,7 +116,7 @@ The bezel lies flat on the bed at 252 × 192, which fits 256 × 256.
 | Right | BOOT, RESET | Z 38 to 60 | Pin-press holes in the back shell |
 | Top | UART1, I2C HY2.0-4P | X 78 to 111 | Back opening with cable exit |
 | Front | Mic (single bottom-port, U176) | X +120.4, Z −61.6 | Ø1 pinhole in the bezel, with a tube sealing to the PCB front |
-| Bottom | GPIO 2×12 female header | X ±25.6 | Back opening with cable exit |
+| Bottom | GPIO 2×12 female header | X ±25.6, Z −71 to −61 | Back opening with cable exit |
 | Bottom | microSD (flat socket on the back; card slides out downward) | X 96 to 112 | Finger window in the back plate below the slot; right speaker at X +75 keeps the withdrawal path clear |
 | Front | Speakers | Chin, X ±90 | Grilles |
 

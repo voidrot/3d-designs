@@ -225,7 +225,7 @@ for zc, yc, zs, ys in [(10.47, 7.58, 12.5, 7.0),    # UART0 USB-C
                      zc - zs / 2, zc + zs / 2, min(ys, zs) / 2 - 0.01, axis="x"))
 # Back openings.
 yb0, yb1 = Y_BACK - WALL - 1, Y_BACK + 1
-cuts.append(rbox(-27.5, 27.5, yb0, yb1, -74.0, -64.0, 2.0))   # GPIO 2x12
+cuts.append(rbox(-27.5, 27.5, yb0, yb1, -71.0, -61.0, 2.0))   # GPIO 2x12
 cuts.append(rbox(76.0, 113.0, yb0, yb1, 64.0, 73.0, 2.0))     # UART1 + I2C
 cuts.append(rbox(-122.6, -114.7, yb0, yb1, -39.5, -24.9, 2.0)) # UART3-IN (vertical XH, plug from back)
 cuts.append(rbox(-122.6, -114.8, yb0, yb1, 22.4, 32.4, 2.0))   # power switch (handle points back)
