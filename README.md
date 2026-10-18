@@ -1,52 +1,105 @@
 # 3d-designs
 
-Parametric FreeCAD designs for 3D-printed parts. Each project lives in its own folder, and a Python generator script builds its geometry.
+Print-ready 3D-printable cases and mounts. Every part prints without supports on a 256 × 256 mm bed, and the STLs are already oriented for printing.
 
-## Projects
-
-| Project | Description | Status |
+| Project | What it is | Status |
 |---|---|---|
-| [10.1-ESP-Touchscreen-Frame](10.1-ESP-Touchscreen-Frame/) | Desk case with a magnetic 30° cradle for the Elecrow CrowPanel Advanced 10.1" ESP32-P4 display | Prototype v2, not yet printed |
+| [CrowPanel 10.1" desk case](#crowpanel-101-desk-case) | Case and magnetic 30° desk cradle for the Elecrow CrowPanel Advanced 10.1" ESP32-P4 | Prototype v2, not yet test-printed |
 
-`Archive/` holds retired iterations kept for reference.
+## CrowPanel 10.1" desk case
 
-## Project layout
+![CrowPanel case, isometric view](10.1-ESP-Touchscreen-Frame/proto_v2_iso.png)
 
-```
-<Project>/
-├── PLAN.md          decisions, reference dimensions, openings, print notes
-├── *_proto.py       parametric generator (source of truth for geometry)
-├── *.FCStd          FreeCAD document produced by the generator
-├── *.stp            vendor reference model
-├── exports/         print-ready STLs
-└── *.png            renders
-```
+A three-part case for the Elecrow CrowPanel Advanced 10.1" ESP32-P4 (DHE04310D):
 
-## Cloning
+- **Bezel:** holds the board, with a thin lip over the glass and a chin with two forward-facing speaker grilles and an inlaid "MISSION CONTROL" label.
+- **Back shell:** snaps on with magnets, so you can open the case without tools. It has vents along the top and bottom edges.
+- **Cradle:** holds the case at 30° on a desk. Magnets keep it from tipping forward, and you can lift the case straight out.
 
-Binary files (`*.FCStd`, `*.stl`, `*.stp`/`*.step`, `*.3mf`, `*.png`) are stored with [Git LFS](https://git-lfs.com). Install it before cloning, or run `git lfs install && git lfs pull` afterward.
+Every port and control stays reachable: both USB-C ports (straight or down-angled plugs), the power switch, BOOT and RESET, microSD, the GPIO header, UART1/I2C, and UART3-IN for an optional 5 V supply.
 
-## Rebuilding a project
+> **Status:** the parts pass all geometry checks, but nobody has printed them yet. Print a small test piece first (see [Before you print](#before-you-print)).
 
-Requires FreeCAD 1.1 or later.
+### Files
 
-**Headless** (regenerates the checks and STLs):
+All in [`10.1-ESP-Touchscreen-Frame/exports/`](10.1-ESP-Touchscreen-Frame/exports/):
+
+| File | Print orientation | Size (mm) |
+|---|---|---|
+| `crowpanel_bezel.stl` | Face down | 252.6 × 191.5 × 18.6 |
+| `crowpanel_bezel_text.stl` | Same position as the bezel | 44.1 × 14.4 × 0.6 |
+| `crowpanel_back_shell.stl` | Back down | 252.6 × 191.5 × 12.7 |
+| `crowpanel_cradle.stl` | Base down | 160 × 179.7 × 100 |
+
+### What you need
+
+| Qty | Part |
+|---|---|
+| 24 | 6 × 3 mm N52 disc magnets (8 pairs for the shell, 4 pairs for the cradle) |
+| 4 | M3 × 6 mm screws (thread into 2.6 mm pilot holes in the bezel) |
+| — | Foam gasket tape, about 1 mm thick, for the speakers |
+| — | Glue for the magnets (CA or epoxy) |
+| — | PETG filament |
+
+### Printing
+
+1. **Material:** PETG is recommended, because the board puts out 8–10 W of heat. Matte PLA is fine for a test fit.
+2. **Supports:** none needed for any part. Use low infill rather than hollowing the parts.
+3. **Bezel:** print face down. The front picks up your build plate's texture.
+4. **Two-color label (optional, needs an AMS):** in Bambu Studio, import `crowpanel_bezel.stl` and `crowpanel_bezel_text.stl` together, answer **Yes** when asked to load them as one object with multiple parts, then assign a second filament to the text part. Without an AMS, print only the bezel and the label stays as a 0.6 mm recess.
+5. **Back shell:** print back down.
+6. **Cradle:** print base down.
+
+### Assembly
+
+1. **Magnets.** Glue them into their pockets after printing; every pocket opens upward, so no print pause is needed.
+
+   > **Warning:** check the polarity of every magnet pair before you glue it in. Hold each magnet up to its partner on the mating part (bezel to back shell, back shell to cradle) and make sure they attract. A magnet glued in backwards repels its partner and is hard to remove.
+2. **Speakers.** Put a ring of foam gasket tape on each speaker face and press it into its pocket in the chin. Route the leads to the SPK-L and SPK-R connectors.
+3. **Board.** Lay the panel face down into the bezel and screw it in with the 4 M3 screws.
+4. **Back shell.** Press it on; the magnets and the rim line it up. To open it, pull at the notch on the bottom edge.
+5. **Cradle.** Set the case into the cradle's pocket and let it slide back against the magnets.
+
+### Using the ports
+
+- **USB-C (left side):** the lower port (USB 2.0) powers the panel; a USB-C cable with a down-angled plug keeps it tidy. The upper port (UART0) is for flashing; use a straight plug there, because the ports are too close for two angled plugs.
+- **External 5 V (optional):** UART3-IN on the back accepts an XH2.54 4-pin plug. Wire only pin 3 (+5 V) and pin 4 (GND), and use a 5.1 V, 3 A or better supply with 22 AWG wire. You can connect it and USB at the same time. Details are in the project [PLAN.md](10.1-ESP-Touchscreen-Frame/PLAN.md#5-v-inlet--verified-from-the-schematic).
+
+### Before you print
+
+Nobody has test-printed these parts yet, so check the fit before committing to a full print. Slice off and print one corner of the bezel (screw post plus a magnet pocket), a slice of the left-side port bay, and one speaker pocket. If anything is too tight or loose, adjust the tolerances (see below) and re-export.
+
+## Customizing
+
+Each design is generated by a Python script for [FreeCAD](https://www.freecad.org/) 1.1 or later. Tolerances, the label text, the cradle angle, and more are parameters at the top of the script, for example in [`crowpanel_case_proto.py`](10.1-ESP-Touchscreen-Frame/crowpanel_case_proto.py):
+
+| Parameter | Controls |
+|---|---|
+| `CLR` | Clearance between the board and the walls |
+| `TEXT` | Label text (`\n` starts a new line) |
+| `TILT` | Cradle angle, in degrees |
+| `CAMERA_WINDOW` | Cut a window for the optional camera module |
+| `MAG_SKIN` | Plastic left over the hidden magnets |
+
+The script also needs the vendor STEP model, which is in the project folder. Then rebuild the STLs:
 
 ```sh
 cd 10.1-ESP-Touchscreen-Frame
 freecadcmd -c "exec(open('crowpanel_case_proto.py').read())"
 ```
 
-**In the FreeCAD GUI** (also updates the 3D model): run this in the Python console, then save the document.
+Or run this in the FreeCAD GUI's Python console to see the model, then save the document:
 
 ```python
 exec(open("/path/to/10.1-ESP-Touchscreen-Frame/crowpanel_case_proto.py").read())
 ```
 
-Each run prints validity and collision checks, then writes STLs to `exports/`. Every STL is already in its print orientation, at z = 0.
+Each run prints validity and collision checks, then writes fresh STLs to `exports/`. The label uses Noto Sans Bold; if it's installed somewhere else, change `TEXT_FONT`.
 
-## Printing
+Each project's `PLAN.md` records the measurements and design decisions behind it.
 
-- Sized for a 256 × 256 mm bed (Bambu Lab).
-- Every part prints without supports. Orientation and material notes are in each project's `PLAN.md`.
-- Multi-color text ships as a separate STL aligned with its host part. In Bambu Studio, import both together as one object with multiple parts, then assign a filament to the text (requires an AMS).
+## Downloading
+
+STLs, renders, and FreeCAD files are stored with [Git LFS](https://git-lfs.com). Install it before cloning, or run `git lfs install && git lfs pull` afterward. Without it, the STLs download as small text pointer files. GitHub's **Download ZIP** may also give you pointer files; download individual STLs from the file view instead.
+
+`Archive/` holds older versions kept for reference; you don't need it.
