@@ -1,6 +1,0 @@
-GUI active document ELCROW_10_1_Dev_Frame_FirstFit_V5
-Source preserved live: 52 solids / 66473.589978309 mm3
-Header to left receiver clearance 0.460977 mm
-Joint -78.4 nut shoulder minimum thickness 0.800 mm, material 13.694453 / 13.694453 mm3
-Joint 78.4 nut shoulder minimum thickness 0.800 mm, material 13.694453 / 13.694453 mm3
-GUI native V5: all 9 printable objects valid single solids
