@@ -11,7 +11,7 @@ FreeCAD designs for 3D-printed parts, one project per top-level folder.
 | `<Project>/*.stp` | Vendor reference model (read-only) |
 | `<Project>/exports/` | Print-ready STLs written by the generator |
 | `<Project>/*.png` | Renders of the current version |
-| `Archive/` | Retired iterations. Read for reference; don't edit |
+| `README.md` | User-facing overview: what each project is, files, printing, assembly, customizing |
 | `.codegraph/`, `.pi/` | Tooling indexes; ignore |
 
 ### Projects
@@ -21,6 +21,21 @@ FreeCAD designs for 3D-printed parts, one project per top-level folder.
 | `10.1-ESP-Touchscreen-Frame/` | Desk case + magnetic cradle for the Elecrow CrowPanel Advanced 10.1" ESP32-P4 |
 
 A new project gets its own folder with a `PLAN.md` and a generator, following the same pattern.
+
+## Docs: repo and Outline
+
+Project docs live in two places: the repo and Outline (Outline MCP), under the **Projects** collection → **3D Designs** page. Keep them in sync: when you change a project doc in the repo, update its Outline page in the same task, and the other way round.
+
+| Repo file | Outline page |
+|---|---|
+| `README.md` | **3D Designs** (`80d1e751-8661-4777-b769-ddafd38cb907`), the overview |
+| `<Project>/PLAN.md` | A child page of **3D Designs**, titled after the project. CrowPanel: **CrowPanel 10.1" Desk Case** (`261d1d51-8ea9-4885-9e20-d4137bc6b668`) |
+
+- **Synced:** user-facing and design docs only (`README.md`, each project's `PLAN.md`, and any new project doc).
+- **Not synced:** agent material such as implementation plans, task lists, scratch notes, and `CLAUDE.md` itself. Keep those in the repo or the scratchpad.
+- **A new project** gets a child page under **3D Designs** and a row in the overview's project table.
+- **Outline formatting:** the title is a separate field, so the body starts without an H1. Repo-relative links and images don't resolve there. Link files as `https://github.com/voidrot/3d-designs/blob/main/<path>`, and embed LFS images from `https://media.githubusercontent.com/media/voidrot/3d-designs/main/<path>`.
+- Edit existing Outline pages with `update_document` in `patch` mode when the change is local. Use `replace` only for a full resync.
 
 ## Environment
 

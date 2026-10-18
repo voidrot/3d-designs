@@ -101,5 +101,3 @@ Each project's `PLAN.md` records the measurements and design decisions behind it
 ## Downloading
 
 STLs, renders, and FreeCAD files are stored with [Git LFS](https://git-lfs.com). Install it before cloning, or run `git lfs install && git lfs pull` afterward. Without it, the STLs download as small text pointer files. GitHub's **Download ZIP** may also give you pointer files; download individual STLs from the file view instead.
-
-`Archive/` holds older versions kept for reference; you don't need it.
